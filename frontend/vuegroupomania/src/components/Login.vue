@@ -1,13 +1,28 @@
 <template>
-    <div class="contenergeneral">
-        <div class="contener-log"></div>
-        <div class="contener">
-            
-            <div class="barre"></div>
-            <div class="space-log"></div>
-        </div>
-        <div class="contener-signup"></div>
-    </div>
+    <v-app>
+        <v-main>
+            <v-container class="fill-height" fluid>
+                <v-row align="center" justify="center dense">
+                    <v-col cols ="12" sm="8" md="4" lg="4">
+                        <v-card elevation="0">
+                            <v-img src="@/assets/logo.svg" alt="Jsp" target="_blank"></v-img>
+                            <v-card-text>
+                                <v-form>
+                                    <v-text-field label="Your email" name="Email" prepend-inner-icon="mdi-mail" type="email" class="rounded-0" outlined></v-text-field>
+                                    <v-text-field label="Password"  name="Password" prepend-inner-icon="mdi-lock" type="password" suffix="| Forgot?" class="rounded=0" outlined></v-text-field>
+                                    <v-btn class="rounded-0" color="#000000" x-large block dark>Login</v-btn>
+                                    <v-card-action class="text--secondary">
+                                        <v-spacer></v-spacer>
+                                        No account? <a href="#" class="pl-2" style="color: #000000">Sign Up</a>
+                                    </v-card-action>
+                                </v-form>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-main>
+    </v-app>
 </template>
 
 <script>
@@ -18,40 +33,4 @@ export default {
 
 <style lang="scss" scoped>
 
-.contenergeneral{
-    background-color: yellowgreen;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-}
-.contener-log{
-    background-color:red;
-    width: 35%;
-    height:100%;
-}
-.contener{
-    background-color: blue;
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-}
-
-.space-log{
-    background-color: yellow;
-    width: 30%;
-    height: 10%;
-}
-.barre{
-    background-color:black;
-    width: 5%;
-    height: 50%;
-}
-
-.contener-signup{
-    background-color: white;
-    width: 35%;
-    height: 100%;
-}
 </style>
