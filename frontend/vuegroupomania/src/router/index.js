@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Accueil from "../views/Accueil.vue";
-import Sign from "../views/Sign.vue";
+import Wall from "../views/Wall.vue";
 
 Vue.use(VueRouter);
 
@@ -20,9 +20,9 @@ const routes = [
   },
 
   {
-    path: "/Signup",
-    name: "Signup",
-    component: Sign,
+    path: "/Wall",
+    name: "Wall",
+    component: Wall,
   },
 
   {

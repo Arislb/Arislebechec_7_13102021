@@ -5,7 +5,12 @@
         <v-row align="center" justify="center dense">
           <v-col cols="12" sm="8" md="4" lg="4">
             <v-card elevation="0" class="displaylogin">
-              <v-img src="@/assets/icon.png" alt="Jsp" target="_blank"></v-img>
+              <v-img
+                src="@/assets/icon-left-font-monochrome-black.png"
+                alt="Jsp"
+                target="_blank"
+                class="logo"
+              ></v-img>
               <v-card-text>
                 <v-form>
                   <v-text-field
@@ -22,7 +27,7 @@
                     prepend-inner-icon="mdi-lock"
                     type="password"
                     suffix="| Forgot?"
-                    class="rounded=0"
+                    class="rounded-0"
                     outlined
                   ></v-text-field>
                   <v-btn class="rounded-0" color="#000000" x-large block dark
@@ -43,8 +48,23 @@
               </v-card-text>
             </v-card>
             <v-card elevation="0" class="displayform backlogin">
+              <v-img
+                src="@/assets/icon-left-font-monochrome-black.png"
+                alt="Jsp"
+                target="_blank"
+                class="logo"
+              ></v-img>
               <v-card-text>
                 <v-form>
+                  <v-text-field
+                    label="Your name"
+                    name="name"
+                    prepend-inner-icon="mdi-mail"
+                    type="name"
+                    class="rounded-0"
+                    outlined
+                    v-model="name"
+                  ></v-text-field>
                   <v-text-field
                     label="Your email"
                     name="Email"
@@ -52,6 +72,7 @@
                     type="email"
                     class="rounded-0"
                     outlined
+                    v-model="email"
                   ></v-text-field>
                   <v-text-field
                     label="Password"
@@ -60,20 +81,14 @@
                     type="password"
                     class="rounded=0"
                     outlined
-                  ></v-text-field>
-                  <v-text-field
-                    label="Your name"
-                    name="name"
-                    prepend-inner-icon="mdi-mail"
-                    type="name"
-                    class="rounded-0"
-                    outlined
+                    v-model="password"
                   ></v-text-field>
                   <v-btn class="rounded-0" color="#000000" x-large block dark
                     >Sign up</v-btn
                   >
                   <v-card-action class="text--secondary">
                     <v-spacer></v-spacer>
+                    I have a account
                     <a
                       href="#"
                       class="pl-2"
@@ -94,6 +109,13 @@
 
 <script>
 export default {
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+    };
+  },
   methods: {
     clicksignup() {
       let formSignup = document.querySelector(".backlogin");
@@ -115,5 +137,8 @@ export default {
 <style lang="scss" scoped>
 .displayform {
   display: none;
+}
+.logo {
+  height: 150px;
 }
 </style>
