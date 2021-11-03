@@ -20,6 +20,7 @@
                     type="email"
                     class="rounded-0"
                     outlined
+                    v-model="email"
                   ></v-text-field>
                   <v-text-field
                     label="Password"
@@ -29,8 +30,15 @@
                     suffix="| Forgot?"
                     class="rounded-0"
                     outlined
+                    v-model="password"
                   ></v-text-field>
-                  <v-btn class="rounded-0" color="#000000" x-large block dark
+                  <v-btn
+                    class="rounded-0"
+                    color="#000000"
+                    x-large
+                    block
+                    dark
+                    @click="fetchLogin"
                     >Login</v-btn
                   >
                   <v-card-action class="text--secondary">
@@ -40,7 +48,7 @@
                       href="#"
                       class="pl-2"
                       style="color: #000000"
-                      @click="clicksignup"
+                      @click="clickSignup"
                       >Sign Up</a
                     >
                   </v-card-action>
@@ -93,7 +101,7 @@
                       href="#"
                       class="pl-2"
                       style="color: #000000"
-                      @click="clicklogin"
+                      @click="clickLogin"
                       >Login</a
                     >
                   </v-card-action>
@@ -117,14 +125,36 @@ export default {
     };
   },
   methods: {
-    clicksignup() {
+    fetchLogin() {
+      const datalog = {
+        email: this.email,
+        password: this.password,
+      };
+      //console.log(datalog);
+      fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify(datalog),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {
+          console.log(response);
+          window.location.href = "#/wall";
+        });
+    },
+
+    clickSignup() {
       let formSignup = document.querySelector(".backlogin");
       let formLogin = document.querySelector(".displaylogin");
       formSignup.classList.remove("displayform");
       formLogin.classList.add("displayform");
     },
 
-    clicklogin() {
+    clickLogin() {
       let formLogin = document.querySelector(".displaylogin");
       let formSignup = document.querySelector(".backlogin");
       formLogin.classList.remove("displayform");
