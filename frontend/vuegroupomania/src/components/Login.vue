@@ -172,8 +172,9 @@ export default {
         .then(function (response) {
           return response.json();
         })
-        .then(function (response) {
+        .then((response) => {
           console.log(response);
+          this.$store.commit("POST_PROFIL", response);
           window.location.href = "#/wall";
         });
     },
@@ -195,8 +196,9 @@ export default {
         .then(function (response) {
           return response.json();
         })
-        .then(function (response) {
+        .then((response) => {
           console.log(response);
+          this.$store.commit("POST_PROFIL", response);
           //window.location.href = "#/wall";
         });
     },

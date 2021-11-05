@@ -18,7 +18,7 @@ exports.signup = (req, res, next) => {
         .then(() =>
           res.status(201).json({
             userId: user.id,
-            admin: user.isAdmin,
+            isAdmin: user.isAdmin,
             email: user.email,
             username: user.username,
             token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
@@ -50,7 +50,7 @@ exports.login = (req, res, next) => {
 
           res.status(200).json({
             userId: user.id,
-            admin: user.isAdmin,
+            isAdmin: user.isAdmin,
             email: user.email,
             username: user.username,
             token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
