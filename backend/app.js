@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 //const hpp = require("hpp");
 
 //Import des routes utilisé
-//const stuffRoutes = require("./routes/stuff");
+const messageRoutes = require("./routes/message");
 const userRoutes = require("./routes/user");
 
 const app = express();
@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 
 //enregistrement des Applications utilisé
 app.use("/api/auth", userRoutes);
-//app.use("/api/sauces", stuffRoutes);
+app.use("/api/message", messageRoutes);
 
 app.use((req, res) => {
   res.json({ message: "Votre requête a bien été reçue !" });

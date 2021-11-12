@@ -22,7 +22,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {},
   getters: {
-    username: (state) => state.username,
+    getusername: (state) => state.username,
   },
   plugins: [
     createPersistedState({

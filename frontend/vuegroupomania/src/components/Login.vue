@@ -199,7 +199,7 @@ export default {
         .then((response) => {
           console.log(response);
           this.$store.commit("POST_PROFIL", response);
-          //window.location.href = "#/wall";
+          window.location.href = "#/wall";
         });
     },
     //Vérification du formulaire
