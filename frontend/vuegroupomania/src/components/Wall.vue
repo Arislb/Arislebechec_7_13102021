@@ -49,8 +49,7 @@ export default {
         body: JSON.stringify(datamessage),
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYzNjczNDgyOCwiZXhwIjoxNjM2ODIxMjI4fQ.-inwvZN6csTCKSC4odwje2iFLcQuyPQ4nvw3TwbqEaI",
+          Authorization: "Bearer " + this.$store.state.token,
         },
       })
         .then(function (response) {

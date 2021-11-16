@@ -174,8 +174,12 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.$store.commit("POST_PROFIL", response);
-          window.location.href = "#/wall";
+          if (response.token) {
+            this.$store.commit("POST_PROFIL", response);
+            this.$router.push("Wall");
+          } else {
+            console.log("Nonpasbon");
+          }
         });
     },
     //Fetch permettant de créer un compte
