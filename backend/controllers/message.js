@@ -1,4 +1,5 @@
 const datab = require("../models/index");
+const message = require("../models/message");
 
 exports.createMessage = (req, res, next) => {
   // rajoute un espace dans la database.(revoir)
@@ -38,5 +39,20 @@ exports.allMessages = (req, res, next) => {
     ],
   })
     .then((message) => res.status(200).json(message))
+    .catch((error) => res.status(400).json({ error }));
+};
+
+exports.deleteMessage = (req, res, next) => {
+  datab.Message.findOne({ Where: { id: req.params.id } })
+    .then((message) => {
+      datab.Message.destroy({ where: { id: req.params.id } })
+        .then(() => {
+          //ICI SUN A DIT TU FOUS LE FS.UNlINK
+          //const filename = message.attachment.split("/images/")[1];
+          //fs.unlink(`images/${filename}`,
+          res.status(200).json({ message: "Message supprimé !" });
+        })
+        .catch((error) => res.status(400).json({ error }));
+    })
     .catch((error) => res.status(400).json({ error }));
 };
