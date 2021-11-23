@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center dense">
+        <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4" lg="4">
             <div>Bienvenue sur le mur {{ getusername }}</div>
             <!-- Zone de texte du mur -->
@@ -22,16 +22,32 @@
               @click="fetchMessage"
               >Send</v-btn
             ><!-- Zone de texte du mur ^^-->
-            <div>
-              <div
+            <v-container>
+              <v-card
+                elevation="4"
+                shaped
                 class="container-messages"
                 v-for="message in messages"
-                :key="message"
+                :key="message.id"
               >
-                <p>{{ message.User.username }}</p>
-                <p class="message-text">{{ message.content }}</p>
-              </div>
-            </div>
+                <v-card-title>{{ message.User.username }}</v-card-title>
+                <v-card-text class="message-text" v-show="!message.hidden">{{
+                  message.content
+                }}</v-card-text>
+                <!-- carte caché début -->
+                <v-card v-show="message.hidden">
+                  <v-textarea v-model="message.content"> </v-textarea>
+                </v-card>
+                <!-- carte caché Fin -->
+                <v-card-actions>
+                  <v-btn
+                    color="primary"
+                    @click="message.hidden = message.hidden ? false : true"
+                    >{{ message.hidden ? "cacher" : "modifier" }}</v-btn
+                  ></v-card-actions
+                >
+              </v-card>
+            </v-container>
           </v-col>
         </v-row>
       </v-container>
@@ -50,6 +66,8 @@ export default {
     };
   },
   methods: {
+    //Modifier les bulles de message via le bouton
+
     // Fetch permettant de recuperer tt les messages
     fetchAllMessages() {
       fetch("http://localhost:3000/api/message", {
@@ -64,6 +82,11 @@ export default {
         })
         .then((response) => {
           console.log(response);
+          //change une liste avec un nouvelle element aka Message => Message.hidden
+          response = response.map((item) => {
+            item.hidden = false;
+            return item;
+          });
           this.messages = response;
         });
     },
@@ -101,12 +124,12 @@ export default {
 
 <style lang="scss" scoped>
 .container-messages {
-  background-color: rgb(46, 45, 45);
+  /*  background-color: rgb(46, 45, 45);
   border: solid 2px;
   border-color: rgb(34, 33, 33);
   border-radius: 10px;
   height: clamp(10vw, 10vw, 10vw);
-  width: clamp(20vw, 100%, 100%);
+  width: clamp(20vw, 100%, 100%); */
   margin-bottom: 0.4vw;
   margin-top: 0.4vw;
 }
