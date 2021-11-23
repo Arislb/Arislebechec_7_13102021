@@ -70,7 +70,7 @@ export default {
     // Fetch permettant l'envois d'un message.
     fetchMessage() {
       const datamessage = {
-        content: this.message,
+        content: this.areamessage,
       };
       fetch("http://localhost:3000/api/message", {
         method: "POST",
@@ -86,7 +86,7 @@ export default {
         .then((response) => {
           console.log(response);
           //Permet de rendre le text-area vide.
-          this.message = "";
+          this.areamessage = "";
         });
     },
   },
@@ -101,11 +101,14 @@ export default {
 
 <style lang="scss" scoped>
 .container-messages {
-  background-color: black;
-  border-color: red;
-  border-radius: 20%;
-  height: 10%;
-  width: 10%;
+  background-color: rgb(46, 45, 45);
+  border: solid 2px;
+  border-color: rgb(34, 33, 33);
+  border-radius: 10px;
+  height: clamp(10vw, 10vw, 10vw);
+  width: clamp(20vw, 100%, 100%);
+  margin-bottom: 0.4vw;
+  margin-top: 0.4vw;
 }
 .message-text {
   color: blanchedalmond;
