@@ -56,3 +56,12 @@ exports.deleteMessage = (req, res, next) => {
     })
     .catch((error) => res.status(400).json({ error }));
 };
+
+exports.modifyMessage = (req, res, next) => {
+  datab.Message.update(
+    { content: req.body.content },
+    { where: { id: req.params.id } }
+  )
+    .then(() => res.status(200).json({ message: "Message modifié !" }))
+    .catch((error) => res.status(400).json({ error }));
+};

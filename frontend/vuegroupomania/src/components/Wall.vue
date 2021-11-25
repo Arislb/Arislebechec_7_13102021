@@ -49,7 +49,9 @@
                     @click="message.hidden = message.hidden ? false : true"
                     >{{ message.hidden ? "cacher" : "modifier" }}</v-btn
                   >
-                  <v-btn v-show="message.hidden"> Envoyer </v-btn>
+                  <v-btn v-show="message.hidden" @click="fetchmodify(message)">
+                    Envoyer
+                  </v-btn>
                   <v-btn v-show="message.hidden"> Supprimer </v-btn>
                 </v-card-actions>
               </v-card>
@@ -116,6 +118,26 @@ export default {
           console.log(response);
           //Permet de rendre le text-area vide.
           this.areamessage = "";
+        });
+    },
+    //fetch permettant la modification d'un message.
+    fetchmodify(message) {
+      console.log(message);
+      console.log(JSON.stringify(message.content));
+
+      fetch("http://localhost:3000/api/message/" + message.id, {
+        method: "PUT",
+        body: JSON.stringify({ content: message.content }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then((response) => {
+          console.log(response);
         });
     },
   },
