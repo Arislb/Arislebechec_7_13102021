@@ -30,10 +30,14 @@
                 v-for="message in messages"
                 :key="message.id"
               >
-                <v-card-title>{{ message.User.username }}</v-card-title>
-                <v-card-text class="message-text" v-show="!message.hidden">{{
-                  message.content
-                }}</v-card-text>
+                <v-card-title class="message-text">{{
+                  message.User.username
+                }}</v-card-title>
+                <v-card-text v-show="!message.hidden"
+                  ><p class="message-text">
+                    {{ message.content }}
+                  </p></v-card-text
+                >
                 <!-- carte caché début -->
                 <v-card v-show="message.hidden">
                   <v-textarea v-model="message.content"> </v-textarea>
@@ -44,8 +48,10 @@
                     color="primary"
                     @click="message.hidden = message.hidden ? false : true"
                     >{{ message.hidden ? "cacher" : "modifier" }}</v-btn
-                  ></v-card-actions
-                >
+                  >
+                  <v-btn v-show="message.hidden"> Envoyer </v-btn>
+                  <v-btn v-show="message.hidden"> Supprimer </v-btn>
+                </v-card-actions>
               </v-card>
             </v-container>
           </v-col>
@@ -124,16 +130,12 @@ export default {
 
 <style lang="scss" scoped>
 .container-messages {
-  /*  background-color: rgb(46, 45, 45);
-  border: solid 2px;
-  border-color: rgb(34, 33, 33);
-  border-radius: 10px;
-  height: clamp(10vw, 10vw, 10vw);
-  width: clamp(20vw, 100%, 100%); */
+  background-color: rgb(78, 72, 72);
+  border: rgb(46, 45, 45) solid 4px;
   margin-bottom: 0.4vw;
   margin-top: 0.4vw;
 }
 .message-text {
-  color: blanchedalmond;
+  color: rgb(250, 249, 249);
 }
 </style>
