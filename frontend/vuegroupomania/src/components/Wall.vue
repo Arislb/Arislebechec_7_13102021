@@ -49,10 +49,12 @@
                     @click="message.hidden = message.hidden ? false : true"
                     >{{ message.hidden ? "cacher" : "modifier" }}</v-btn
                   >
-                  <v-btn v-show="message.hidden" @click="fetchmodify(message)">
+                  <v-btn v-show="message.hidden" @click="fetchModify(message)">
                     Envoyer
                   </v-btn>
-                  <v-btn v-show="message.hidden"> Supprimer </v-btn>
+                  <v-btn v-show="message.hidden" @click="fetchDelete(message)">
+                    Supprimer
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-container>
@@ -121,7 +123,7 @@ export default {
         });
     },
     //fetch permettant la modification d'un message.
-    fetchmodify(message) {
+    fetchModify(message) {
       console.log(message);
       console.log(JSON.stringify(message.content));
 
@@ -138,6 +140,22 @@ export default {
         })
         .then((response) => {
           console.log(response);
+        });
+    },
+    //fetch permettant de supprimer son message.
+    fetchDelete(message) {
+      fetch("http://localhost:3000/api/message/" + message.id, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(() => {
+          this.messages = this.messages.filter((item) => item != message);
         });
     },
   },

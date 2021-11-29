@@ -59,6 +59,7 @@ exports.deleteMessage = (req, res, next) => {
 
 exports.modifyMessage = (req, res, next) => {
   datab.Message.update(
+    //L'element viser d'abord puis le l'endroit
     { content: req.body.content },
     { where: { id: req.params.id } }
   )
