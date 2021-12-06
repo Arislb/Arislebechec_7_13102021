@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Accueil from "../views/Accueil.vue";
 import Wall from "../views/Wall.vue";
+import Profil from "../views/Profil.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,11 @@ const routes = [
     path: "/Wall",
     name: "Wall",
     component: Wall,
+  },
+  {
+    path: "/Profil",
+    name: "Profil",
+    component: Profil,
   },
 
   {
