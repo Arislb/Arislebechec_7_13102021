@@ -100,6 +100,7 @@ export default {
           this.messages = response;
         });
     },
+
     // Fetch permettant l'envois d'un message.
     fetchMessage() {
       const datamessage = {
@@ -158,12 +159,30 @@ export default {
           this.messages = this.messages.filter((item) => item != message);
         });
     },
+
+    fetchGetUser() {
+      fetch("http://localhost:3000/api/auth", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then((response) => {
+          this.$store.commit("POST_PROFIL", response);
+          console.log(response);
+        });
+    },
   },
   computed: {
     ...mapGetters(["getusername"]),
   },
   mounted: function () {
     this.fetchAllMessages();
+    this.fetchGetUser();
   },
 };
 </script>

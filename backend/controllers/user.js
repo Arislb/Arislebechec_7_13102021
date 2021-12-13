@@ -63,3 +63,40 @@ exports.login = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+exports.modifyUser = (req, res, next) => {
+  datab.User.update(
+    //L'element viser d'abord puis le l'endroit
+    { username: req.body.username, email: req.body.email },
+    { where: { id: res.locals.userId } }
+  );
+  datab.User.findOne({ where: { id: res.locals.userId } })
+    .then((user) =>
+      res.status(200).json({
+        message: "profil modifié !",
+        isAdmin: user.isAdmin,
+        email: user.email,
+        username: user.username,
+        token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
+          expiresIn: "24h",
+        }),
+      })
+    )
+    .catch((error) => res.status(400).json({ error }));
+};
+
+exports.getUser = (req, res, next) => {
+  datab.User.findOne({ where: { id: res.locals.userId } })
+    .then((user) =>
+      res.status(200).json({
+        message: "profil modifié !",
+        isAdmin: user.isAdmin,
+        email: user.email,
+        username: user.username,
+        token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
+          expiresIn: "24h",
+        }),
+      })
+    )
+    .catch((error) => res.status(400).json({ error }));
+};

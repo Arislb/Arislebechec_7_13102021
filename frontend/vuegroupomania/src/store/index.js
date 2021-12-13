@@ -18,11 +18,20 @@ export default new Vuex.Store({
       state.token = response.token;
       state.isAdmin = response.isAdmin;
     },
+    DISCONNECT(state) {
+      state.email = "";
+      state.token = "";
+      state.username = "";
+      state.isAdmin = false;
+    },
   },
   actions: {},
   modules: {},
   getters: {
     getusername: (state) => state.username,
+    getemail: (state) => state.email,
+    gettoken: (state) => state.token,
+    getadmin: (state) => state.isAdmin,
   },
   plugins: [
     createPersistedState({
