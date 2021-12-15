@@ -32,7 +32,39 @@
                 <v-btn outlined rounded text @click="hidden = !hidden">
                   Modifier
                 </v-btn>
-                <v-btn outlined rounded text> Supprimer</v-btn>
+                <v-btn
+                  plain
+                  text
+                  @click="alert()"
+                  v-if="noAlert"
+                  depressed
+                  color="error"
+                  class="btn-delete"
+                >
+                  Supprimer le compte
+                </v-btn>
+                <v-alert
+                  v-if="alertProfil"
+                  prominent
+                  type="error"
+                  class="container-alert"
+                >
+                  <v-row align="center">
+                    <v-col class="grow">
+                      La suppression du compte est définitive
+                    </v-col>
+                    <v-col class="shrink d-flex">
+                      <v-btn @click="fetchDeleteUser" class="btn_alert"
+                        >Passez à l'action</v-btn
+                      >
+                      <router-link to="Wall" class="btn_home">
+                        <v-btn color="green darken-2"
+                          >Finalement je reste</v-btn
+                        >
+                      </router-link>
+                    </v-col>
+                  </v-row>
+                </v-alert>
               </v-card-actions>
             </v-card>
             <!-- Zone fin carte profil ^^-->
@@ -78,6 +110,8 @@ export default {
       newname: "",
       newemail: "",
       hidden: false,
+      alertProfil: false,
+      noAlert: true,
     };
   },
   computed: {
@@ -100,6 +134,9 @@ export default {
     ...mapGetters(["getusername", "getemail"]),
   },
   methods: {
+    alert() {
+      (this.alertProfil = true), (this.noAlert = false);
+    },
     fetchModifyUser() {
       fetch("http://localhost:3000/api/auth", {
         method: "PUT",
@@ -116,6 +153,25 @@ export default {
           this.$store.commit("POST_PROFIL", response);
           this.$router.push({ name: "Wall" });
           console.log(response);
+        });
+    },
+
+    //Suppression d'un utilisateur
+    fetchDeleteUser() {
+      fetch("http://localhost:3000/api/auth/", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(() => {
+          this.$store.commit("DISCONNECT");
+          sessionStorage.clear();
+          this.$router.push({ name: "Accueil" });
         });
     },
 
