@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-//const path = require("path");
+const path = require("path");
 
 //const helmet = require("helmet");
 //const hpp = require("hpp");
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 //app.use(hpp());
 
 //destination des images
-//app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 //enregistrement des Applications utilisé
 app.use("/api/auth", userRoutes);

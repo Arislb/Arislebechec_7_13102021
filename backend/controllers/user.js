@@ -106,9 +106,6 @@ exports.deleteUser = (req, res, next) => {
     .then((user) => {
       datab.User.destroy({ where: { id: res.locals.userId } })
         .then(() => {
-          //ICI SUN A DIT TU FOUS LE FS.UNlINK
-          //const filename = message.attachment.split("/images/")[1];
-          //fs.unlink(`images/${filename}`,
           res.status(200).json({ message: "Utilisateur supprimé !" });
         })
         .catch((error) => res.status(400).json({ error }));

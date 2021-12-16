@@ -1,12 +1,6 @@
 <template>
   <nav class="topbar">
-    <v-app-bar
-      absolute
-      color="grey"
-      elevate-on-scroll
-      scroll-target="#scrolling-techniques-7"
-      app
-    >
+    <v-app-bar absolute color="grey" elevate-on-scroll app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Groupomania</v-toolbar-title>
@@ -56,7 +50,7 @@
   z-index: 1;
 }
 .drawer {
-  z-index: 2;
+  z-index: 99;
 }
 </style>
 

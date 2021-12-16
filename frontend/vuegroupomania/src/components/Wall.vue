@@ -8,11 +8,15 @@
             <!-- Zone de texte du mur -->
             <v-textarea
               outlined
-              name="input-7-4"
               label="Ecris un message"
               v-model="areamessage"
               :rules="msgrules"
             ></v-textarea>
+            <v-file-input
+              v-model="image"
+              accept="image/*"
+              truncate-length="20"
+            ></v-file-input>
             <v-btn
               class="rounded-0"
               color="#000000"
@@ -38,6 +42,11 @@
                     {{ message.content }}
                   </p></v-card-text
                 >
+                <!--  Zone de L'image -->
+                <div class="img">
+                  <img :src="message.attachment" alt="" />
+                </div>
+                <!--  Zone de L'image FIN  -->
                 <!-- carte caché début -->
                 <v-card v-show="message.hidden">
                   <v-textarea v-model="message.content"> </v-textarea>
@@ -70,6 +79,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      image: null,
       areamessage: "",
       messages: [],
       msgrules: [(v) => v.length <= 255 || "Max 255 caractères"],
@@ -103,14 +113,14 @@ export default {
 
     // Fetch permettant l'envois d'un message.
     fetchMessage() {
-      const datamessage = {
-        content: this.areamessage,
-      };
+      const formData = new FormData();
+      formData.append("attachment", this.image);
+      formData.append("content", this.areamessage);
+
       fetch("http://localhost:3000/api/message", {
         method: "POST",
-        body: JSON.stringify(datamessage),
+        body: formData,
         headers: {
-          "Content-Type": "application/json",
           Authorization: "Bearer " + this.$store.state.token,
         },
       })
@@ -148,7 +158,7 @@ export default {
       fetch("http://localhost:3000/api/message/" + message.id, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
+          /* "Content-Type": "application/json", */
           Authorization: "Bearer " + this.$store.state.token,
         },
       })
@@ -196,5 +206,10 @@ export default {
 }
 .message-text {
   color: rgb(250, 249, 249);
+}
+
+.img img {
+  height: 100%;
+  width: 100%;
 }
 </style>
