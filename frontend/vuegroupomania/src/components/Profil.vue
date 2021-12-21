@@ -77,6 +77,7 @@
                       v-model="newname"
                       :placeholder="[[getusername]]"
                       label="Username"
+                      :rules="nameRules"
                       outlined
                     ></v-text-field>
                   </v-col>
@@ -86,6 +87,7 @@
                       v-model="newemail"
                       :placeholder="[[getemail]]"
                       label="E-mail"
+                      :rules="emailRules"
                       outlined
                     ></v-text-field>
                   </v-col>
@@ -107,8 +109,17 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      valid: true,
       newname: "",
+      nameRules: [
+        (v) => !!v || "Le nom est requis",
+        (v) => v.length <= 10 || "Min. 10 caractères",
+      ],
       newemail: "",
+      emailRules: [
+        (v) => !!v || "Email est requis",
+        (v) => /.+@.+/.test(v) || " L'e-mail doit être valide",
+      ],
       hidden: false,
       alertProfil: false,
       noAlert: true,

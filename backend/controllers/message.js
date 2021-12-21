@@ -58,9 +58,6 @@ exports.deleteMessage = (req, res, next) => {
     where: { id: req.params.id },
   })
     .then((message) => {
-      console.log("JE SUIS LA");
-      console.log(message);
-
       datab.Message.destroy({
         where: { id: req.params.id },
       })
