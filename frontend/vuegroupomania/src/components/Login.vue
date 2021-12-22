@@ -170,6 +170,7 @@ export default {
         },
       })
         .then(function (response) {
+          sessionStorage.setItem("LogOk", JSON.stringify("1"));
           return response.json();
         })
         .then((response) => {

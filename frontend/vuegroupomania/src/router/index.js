@@ -24,11 +24,25 @@ const routes = [
     path: "/Wall",
     name: "Wall",
     component: Wall,
+    beforeEnter(to, from, next) {
+      if (sessionStorage.getItem("LogOk")) {
+        next();
+      } else {
+        next({ name: "Accueil" });
+      }
+    },
   },
   {
     path: "/Profil",
     name: "Profil",
     component: Profil,
+    beforeEnter(to, from, next) {
+      if (sessionStorage.getItem("LogOk")) {
+        next();
+      } else {
+        next({ name: "Accueil" });
+      }
+    },
   },
 
   {
