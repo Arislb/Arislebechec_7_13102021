@@ -54,8 +54,12 @@ exports.allMessages = (req, res, next) => {
 
 // Zheyn code !
 exports.deleteMessage = (req, res, next) => {
+  let params = { id: req.params.id };
+  if (!res.locals.isAdmin) {
+    params.UserId = res.locals.userId;
+  }
   datab.Message.findOne({
-    where: { id: req.params.id },
+    where: params,
   })
     .then((message) => {
       datab.Message.destroy({
@@ -74,7 +78,7 @@ exports.deleteMessage = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-/* exports.deleteMessage = (req, res, next) => {
+/*exports.deleteMessage = (req, res, next) => {
   datab.Message.findOne({ Where: { id: req.params.id } })
     .then((message) => {
       console.log("JE SUIS LA");
@@ -95,10 +99,14 @@ exports.deleteMessage = (req, res, next) => {
 }; */
 
 exports.modifyMessage = (req, res, next) => {
+  let params = { id: req.params.id };
+  if (!res.locals.isAdmin) {
+    params.UserId = res.locals.userId;
+  }
   datab.Message.update(
     //L'element viser d'abord puis le l'endroit
     { content: req.body.content },
-    { where: { id: req.params.id } }
+    { where: { params } }
   )
     .then(() => res.status(200).json({ message: "Message modifié !" }))
     .catch((error) => res.status(400).json({ error }));

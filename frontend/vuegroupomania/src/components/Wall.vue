@@ -52,7 +52,9 @@
                   <v-textarea v-model="message.content"> </v-textarea>
                 </v-card>
                 <!-- carte caché Fin -->
-                <v-card-actions>
+                <v-card-actions
+                  v-if="getadmin || getusername == message.User.username"
+                >
                   <v-btn
                     color="primary"
                     @click="message.hidden = message.hidden ? false : true"
@@ -131,6 +133,8 @@ export default {
           console.log(response);
           //Permet de rendre le text-area vide.
           this.areamessage = "";
+          response.hidden = false;
+          this.messages.unshift(response);
         });
     },
     //fetch permettant la modification d'un message.
@@ -149,8 +153,8 @@ export default {
         .then(function (response) {
           return response.json();
         })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          message.hidden = false;
         });
     },
     //fetch permettant de supprimer son message.
@@ -188,7 +192,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getusername"]),
+    ...mapGetters(["getusername", "getadmin"]),
   },
   mounted: function () {
     this.fetchAllMessages();

@@ -21,9 +21,13 @@ exports.signup = (req, res, next) => {
             isAdmin: user.isAdmin,
             email: user.email,
             username: user.username,
-            token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
-              expiresIn: "24h",
-            }),
+            token: jwt.sign(
+              { userId: user.id, isAdmin: user.isAdmin },
+              "RANDOM_TOKEN_SECRET",
+              {
+                expiresIn: "24h",
+              }
+            ),
             message: "Utilisateur créé !",
           })
         )
