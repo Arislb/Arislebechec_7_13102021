@@ -5,7 +5,7 @@
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4" lg="4">
             <div align="center" justify="center">
-              Bienvenue sur le mur {{ getusername }}
+              Bienvenue sur ton Profil {{ getusername }}
             </div>
             <!-- Zone carte profil -->
             <v-card class="mx-auto" max-width="344" outlined>
