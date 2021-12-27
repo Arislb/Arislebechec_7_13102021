@@ -49,3 +49,4 @@ Remplir le fichier env. avec  :
 ```
 TOKEN="RANDOM_TOKEN_SECRET"
 ```
+Importer le fichier "database_development_groupomania.sql" dans la base de données, par exemple Phpmyadmin. Sinon créer votre nouvelle base de donnée avec sequelize dans le terminal du dossier backend: "sequelize db:create" puis "sequelize db:migrate".
