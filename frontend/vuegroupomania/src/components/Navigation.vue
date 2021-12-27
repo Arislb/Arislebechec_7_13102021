@@ -1,7 +1,10 @@
 <template>
   <nav class="topbar">
     <v-app-bar absolute color="grey" elevate-on-scroll app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        class="burger-menu"
+        @click="drawer = !drawer"
+      ></v-app-bar-nav-icon>
 
       <v-toolbar-title>Groupomania</v-toolbar-title>
 
@@ -41,6 +44,9 @@
 </template>
 
 <style scoped>
+.burger-menu {
+  display: none;
+}
 .link {
   text-decoration: none;
 }
@@ -51,6 +57,12 @@
 }
 .drawer {
   z-index: 99;
+}
+
+@media screen and (max-width: 768px) {
+  .burger-menu {
+    display: block;
+  }
 }
 </style>
 

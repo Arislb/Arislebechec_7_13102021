@@ -8,24 +8,24 @@
               Bienvenue sur ton Profil {{ getusername }}
             </div>
             <!-- Zone carte profil -->
-            <v-card class="mx-auto" max-width="344" outlined>
+            <v-card class="mx-auto" max-width="500" outlined>
               <v-list-item three-line>
                 <v-list-item-content>
                   <div class="text-overline mb-4">Carte {{ getusername }}</div>
                   <v-list-item-title class="text-h5 mb-1">
-                    Membre
+                    Membre Groupomania
                   </v-list-item-title>
                   <v-list-item-subtitle
-                    >Votre carte membre ! Oui, vous êtes
-                    membre</v-list-item-subtitle
+                    >Votre carte membre est liée à cet email:
+                    {{ getemail }}</v-list-item-subtitle
                   >
                 </v-list-item-content>
 
-                <v-list-item-avatar
-                  tile
-                  size="80"
-                  color="grey"
-                ></v-list-item-avatar>
+                <v-avatar size="100">
+                  <v-icon size="100" color="pink lighten-2">
+                    mdi-account-circle
+                  </v-icon>
+                </v-avatar>
               </v-list-item>
 
               <v-card-actions>
@@ -54,13 +54,11 @@
                       La suppression du compte est définitive
                     </v-col>
                     <v-col class="shrink d-flex">
-                      <v-btn @click="fetchDeleteUser" class="btn_alert"
-                        >Passez à l'action</v-btn
+                      <v-btn @click="fetchDeleteUser" class="btn-alert"
+                        >Confirmer</v-btn
                       >
-                      <router-link to="Wall" class="btn_home">
-                        <v-btn color="green darken-2"
-                          >Finalement je reste</v-btn
-                        >
+                      <router-link to="Wall" class="btn-home">
+                        <v-btn color="green darken-2">Annuler</v-btn>
                       </router-link>
                     </v-col>
                   </v-row>
@@ -171,3 +169,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn-home {
+  margin-left: 0.5vw;
+}
+</style>
