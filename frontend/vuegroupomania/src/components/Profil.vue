@@ -126,22 +126,6 @@ export default {
     };
   },
   computed: {
-    /*     name: {
-      get: function () {
-        return store.state.username;
-      },
-      set: function (input) {
-        this.newname = input;
-      },
-    },
-    email: {
-      get: function () {
-        return store.state.email;
-      },
-      set: function (input) {
-        this.newemail = input;
-      },
-    }, */
     ...mapGetters(["getusername", "getemail"]),
   },
   methods: {
@@ -163,7 +147,6 @@ export default {
         .then((response) => {
           this.$store.commit("POST_PROFIL", response);
           this.$router.push({ name: "Wall" });
-          console.log(response);
         });
     },
 
@@ -184,14 +167,6 @@ export default {
           sessionStorage.clear();
           this.$router.push({ name: "Accueil" });
         });
-    },
-
-    testconsole() {
-      /* let resultatN = this.newname === "" ? store.state.username : this.newname; */
-      /* console.log(resultatN); */
-      console.log(
-        "résultat name =" + this.newname + "/résultat name =" + this.newemail
-      );
     },
   },
 };

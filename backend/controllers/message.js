@@ -52,7 +52,6 @@ exports.allMessages = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-// Zheyn code !
 exports.deleteMessage = (req, res, next) => {
   let params = { id: req.params.id };
   if (!res.locals.isAdmin) {
@@ -77,26 +76,6 @@ exports.deleteMessage = (req, res, next) => {
     })
     .catch((error) => res.status(400).json({ error }));
 };
-
-/*exports.deleteMessage = (req, res, next) => {
-  datab.Message.findOne({ Where: { id: req.params.id } })
-    .then((message) => {
-      console.log("JE SUIS LA");
-      console.log(message);
-
-      datab.Message.destroy({ where: { id: req.params.id } })
-        .then(() => {
-          const fileName = message.attachment.split("/images/")[1];
-          if (fs.existsSync(`images/${fileName}`)) {
-            fs.unlinkSync(`images/${fileName}`);
-          }
-          console.log(fileName);
-          res.status(200).json({ message: "Message supprimé !" });
-        })
-        .catch((error) => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(400).json({ error }));
-}; */
 
 exports.modifyMessage = (req, res, next) => {
   let params = { id: req.params.id };

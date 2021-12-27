@@ -103,7 +103,6 @@ export default {
           return response.json();
         })
         .then((response) => {
-          console.log(response);
           //change une liste avec un nouvelle element aka Message => Message.hidden
           response = response.map((item) => {
             item.hidden = false;
@@ -130,7 +129,6 @@ export default {
           return response.json();
         })
         .then((response) => {
-          console.log(response);
           //Permet de rendre le text-area vide.
           this.areamessage = "";
           response.hidden = false;
@@ -139,9 +137,6 @@ export default {
     },
     //fetch permettant la modification d'un message.
     fetchModify(message) {
-      console.log(message);
-      console.log(JSON.stringify(message.content));
-
       fetch("http://localhost:3000/api/message/" + message.id, {
         method: "PUT",
         body: JSON.stringify({ content: message.content }),
@@ -162,7 +157,6 @@ export default {
       fetch("http://localhost:3000/api/message/" + message.id, {
         method: "DELETE",
         headers: {
-          /* "Content-Type": "application/json", */
           Authorization: "Bearer " + this.$store.state.token,
         },
       })
@@ -187,7 +181,6 @@ export default {
         })
         .then((response) => {
           this.$store.commit("POST_PROFIL", response);
-          console.log(response);
         });
     },
   },

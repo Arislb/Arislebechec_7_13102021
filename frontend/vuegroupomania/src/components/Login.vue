@@ -161,7 +161,6 @@ export default {
         email: this.email,
         password: this.password,
       };
-      //console.log(datalog);
       fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         body: JSON.stringify(datalog),
@@ -174,12 +173,9 @@ export default {
           return response.json();
         })
         .then((response) => {
-          console.log(response);
           if (response.token) {
             this.$store.commit("POST_PROFIL", response);
             this.$router.push("Wall");
-          } else {
-            console.log("Nonpasbon");
           }
         });
     },
@@ -202,7 +198,6 @@ export default {
           return response.json();
         })
         .then((response) => {
-          console.log(response);
           this.$store.commit("POST_PROFIL", response);
           window.location.href = "#/wall";
         });

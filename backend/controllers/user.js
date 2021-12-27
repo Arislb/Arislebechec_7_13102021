@@ -1,6 +1,7 @@
 const datab = require("../models/index");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 //logique d'engeristement signup et hashage du mot de passe.
 exports.signup = (req, res, next) => {
@@ -23,7 +24,7 @@ exports.signup = (req, res, next) => {
             username: user.username,
             token: jwt.sign(
               { userId: user.id, isAdmin: user.isAdmin },
-              "RANDOM_TOKEN_SECRET",
+              process.env.TOKEN,
               {
                 expiresIn: "24h",
               }
@@ -57,11 +58,10 @@ exports.login = (req, res, next) => {
             isAdmin: user.isAdmin,
             email: user.email,
             username: user.username,
-            token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
+            token: jwt.sign({ userId: user.id }, process.env.TOKEN, {
               expiresIn: "24h",
             }),
           });
-          console.log(valid);
         })
         .catch((error) => res.status(500).json({ error }));
     })
@@ -81,7 +81,7 @@ exports.modifyUser = (req, res, next) => {
         isAdmin: user.isAdmin,
         email: user.email,
         username: user.username,
-        token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
+        token: jwt.sign({ userId: user.id }, process.env.TOKEN, {
           expiresIn: "24h",
         }),
       })
@@ -97,7 +97,7 @@ exports.getUser = (req, res, next) => {
         isAdmin: user.isAdmin,
         email: user.email,
         username: user.username,
-        token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
+        token: jwt.sign({ userId: user.id }, process.env.TOKEN, {
           expiresIn: "24h",
         }),
       })
