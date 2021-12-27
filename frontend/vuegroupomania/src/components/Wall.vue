@@ -116,23 +116,24 @@ export default {
       const formData = new FormData();
       formData.append("attachment", this.image);
       formData.append("content", this.areamessage);
-
-      fetch("http://localhost:3000/api/message", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: "Bearer " + this.$store.state.token,
-        },
-      })
-        .then(function (response) {
-          return response.json();
+      if (!this.areamessage == "") {
+        fetch("http://localhost:3000/api/message", {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: "Bearer " + this.$store.state.token,
+          },
         })
-        .then((response) => {
-          //Permet de rendre le text-area vide.
-          this.areamessage = "";
-          response.hidden = false;
-          this.messages.unshift(response);
-        });
+          .then(function (response) {
+            return response.json();
+          })
+          .then((response) => {
+            //Permet de rendre le text-area vide.
+            this.areamessage = "";
+            response.hidden = false;
+            this.messages.unshift(response);
+          });
+      }
     },
     //fetch permettant la modification d'un message.
     fetchModify(message) {
@@ -215,6 +216,5 @@ export default {
 }
 .img img {
   width: 100%;
-  border: 1px solid black;
 }
 </style>
