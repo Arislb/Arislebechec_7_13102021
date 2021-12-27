@@ -29,7 +29,6 @@
             <v-container>
               <v-card
                 elevation="4"
-                shaped
                 class="container-messages"
                 v-for="message in messages"
                 :key="message.id"
@@ -56,7 +55,7 @@
                   v-if="getadmin || getusername == message.User.username"
                 >
                   <v-btn
-                    color="primary"
+                    color="pink lighten-3"
                     @click="message.hidden = message.hidden ? false : true"
                     >{{ message.hidden ? "cacher" : "modifier" }}</v-btn
                   >
@@ -195,9 +194,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.btn-send {
+  width: 90% !important;
+  margin: auto;
+}
 .container-messages {
-  background-color: rgb(78, 72, 72);
-  border: rgb(46, 45, 45) solid 4px;
+  background-color: rgb(41, 38, 38);
+  border: rgb(0, 0, 0) solid 4px;
   margin-bottom: 0.4vw;
   margin-top: 0.4vw;
 }
@@ -205,8 +208,13 @@ export default {
   color: rgb(250, 249, 249);
 }
 
+.img {
+  margin: auto;
+  height: auto;
+  width: 70%;
+}
 .img img {
-  height: 100%;
   width: 100%;
+  border: 1px solid black;
 }
 </style>

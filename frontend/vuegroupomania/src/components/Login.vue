@@ -28,7 +28,6 @@
                     name="Password"
                     prepend-inner-icon="mdi-lock"
                     type="password"
-                    suffix="| Forgot?"
                     class="rounded-0"
                     outlined
                     v-model="password"
@@ -198,6 +197,9 @@ export default {
           return response.json();
         })
         .then((response) => {
+          if (response.userId) {
+            sessionStorage.setItem("LogOk", JSON.stringify("1"));
+          }
           this.$store.commit("POST_PROFIL", response);
           window.location.href = "#/wall";
         });
