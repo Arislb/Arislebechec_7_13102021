@@ -85,8 +85,7 @@ exports.modifyMessage = (req, res, next) => {
   datab.Message.update(
     //L'element viser d'abord puis le l'endroit
     { content: req.body.content },
-    { where: { params } }
-  )
-    .then(() => res.status(200).json({ message: "Message modifié !" }))
-    .catch((error) => res.status(400).json({ error }));
+    { where: params }
+  ).then(() => res.status(200).json({ message: "Message modifié !" }));
+  //.catch((error) => res.status(400).json({ error }));
 };

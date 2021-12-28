@@ -168,11 +168,11 @@ export default {
         },
       })
         .then(function (response) {
-          sessionStorage.setItem("LogOk", JSON.stringify("1"));
           return response.json();
         })
         .then((response) => {
           if (response.token) {
+            sessionStorage.setItem("LogOk", JSON.stringify("1"));
             this.$store.commit("POST_PROFIL", response);
             this.$router.push("Wall");
           }
